@@ -1,0 +1,38 @@
+<div class="d-flex h-100 align-items-center justify-content-center">
+<form class="d-inline-flex flex-column" (reset)="formData"  [formGroup]="formData" (ngSubmit)="onSubmit($event)">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name"  /> </mat-form-field
+  ><br />
+  <div *ngIf="formData.get('name')?.errors && formData.get('name')?.dirty">
+    <p *ngIf="formData.get('name')?.hasError('required')">
+      El campo es requerido
+    </p>
+  </div>
+  <br />
+
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <input matInput formControlName="category" /> </mat-form-field
+  ><br />
+  <div
+    *ngIf="formData.get('category')?.dirty">
+    <p *ngIf="formData.get('category')?.hasError('required')">
+      El campo es requerido
+    </p>
+  </div>
+  <br />
+
+  <mat-checkbox formControlName="check">Check me!
+    <div *ngIf="formData.get('check')?.errors">
+      <p *ngIf="formData.get('check')?.hasError('requiredTrue') && formData.get('check')?.dirty">
+        El campo es requerido
+      </p>
+    </div>
+  </mat-checkbox>
+  <br />
+
+  <br />
+  <button mat-button color="warn" type="submit" [disabled]="formData.invalid">Add Task</button>
+</form>
+</div> 

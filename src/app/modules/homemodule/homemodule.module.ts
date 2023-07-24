@@ -8,12 +8,18 @@ import { FormsModule } from '@angular/forms';
 import { HomecomponentComponent } from '../../components/home';
 import { TasktableComponent } from '../../components/tasktable';
 import { DonetasksComponent } from '../../components/donetasks';
+import { CreatetaskComponent } from '../../components/createtask';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
     HomecomponentComponent,
     TasktableComponent,
     DonetasksComponent,
+    CreatetaskComponent,
   ],
   imports: [
     CommonModule,
@@ -22,6 +28,9 @@ import { DonetasksComponent } from '../../components/donetasks';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
 })
 export class HomemoduleModule {}

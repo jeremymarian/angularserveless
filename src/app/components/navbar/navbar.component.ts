@@ -16,6 +16,7 @@ import {
   MatDialogModule,
 } from '@angular/material/dialog';
 import { DonetasksComponent } from '../donetasks';
+import { CreatetaskComponent } from '../createtask';
 
 @Component({
   standalone: true,
@@ -53,4 +54,16 @@ export class NavbarComponent {
       exitAnimationDuration,
     });
   }
+  openDial(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(CreatetaskComponent, {
+      width: '500px',
+      height: '400px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
 }
+
