@@ -3,8 +3,8 @@ import {
   MatTableDataSource,
   _MatTableDataSource,
 } from '@angular/material/table';
-import { PeriodicElement } from '../tasktable';
-import { TaskloaderService } from 'src/app/services';
+import { PeriodicElement } from 'src/app/interfaces';
+import { ChekcsService } from 'src/app/services';
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -14,21 +14,24 @@ import { Observable, map } from 'rxjs';
 })
 export class DonetasksComponent implements OnDestroy {
   private dataSource = new MatTableDataSource<PeriodicElement>();
-
-  constructor(private dt: TaskloaderService) {}
+  selectedItems: PeriodicElement[] = [];
+  constructor(
+    private ch: ChekcsService
+  ) {}
 
   thingsAsMatTableDataSource$: Observable<MatTableDataSource<PeriodicElement>> =
-    this.dt.getData.pipe(
+    this.ch.getChecks.pipe(
       map(things => {
         const dataSource = this.dataSource;
+        let selectedItems = this.selectedItems;
         dataSource.data = things;
-        return dataSource;
-      })
+        selectedItems.push(...things)
+        return dataSource || selectedItems })
     );
 
   displayedColumns: string[] = ['position', 'name', 'category'];
 
   ngOnDestroy(): void {
-    this.dt.getData.subscribe().unsubscribe()
+    this.ch.getChecks.subscribe().unsubscribe();
   }
 }

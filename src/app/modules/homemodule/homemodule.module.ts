@@ -12,6 +12,9 @@ import { CreatetaskComponent } from '../../components/createtask';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
+import { BackendbuttComponent } from '../../components';
+
 
 
 @NgModule({
@@ -20,6 +23,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     TasktableComponent,
     DonetasksComponent,
     CreatetaskComponent,
+    BackendbuttComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +34,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule,
   ],
+  
 })
 export class HomemoduleModule {}

@@ -1,60 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { TaskloaderService } from 'src/app/services';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  category: string;
-  check: boolean | undefined;
-}
+import { ChekcsService, TaskloaderService } from '../../services'
+import { PeriodicElement } from 'src/app/interfaces';
+import { map, Observable } from 'rxjs';
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Do Graffiti', category: 'Creative', check: false },
-  {
-    position: 2,
-    name: 'Go to the Mall of America',
-    category: 'Travel',
-    check: false,
-  },
-  {
-    position: 3,
-    name: 'Confess my Feelings',
-    category: 'Social and Relationship',
-    check: false,
-  },
-  {
-    position: 4,
-    name: 'Go Camping With my Best Friends',
-    category: 'Adventure',
-    check: false,
-  },
-  { position: 5, name: 'Become Ambidextrous', category: 'Cool', check: false },
-  {
-    position: 6,
-    name: 'Become a Sage',
-    category: 'Business and Career',
-    check: false,
-  },
-  {
-    position: 7,
-    name: 'Manage a Nightclub',
-    category: 'Business and Career',
-    check: false,
-  },
-  {
-    position: 8,
-    name: 'Camp in the Backyard',
-    category: 'Adventure',
-    check: false,
-  },
-  {
-    position: 9,
-    name: 'Complete a Marathon',
-    category: 'Health and Fitness',
-    check: false,
-  },
-  { position: 10, name: 'Play Paintball', category: 'Fun', check: false },
-];
+
 
 @Component({
   selector: 'app-tasktable',
@@ -63,10 +13,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class TasktableComponent {
   displayedColumns: string[] = ['position', 'name', 'category', 'check'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
   selectedItems: PeriodicElement[] = [];
+  private dataSource = new MatTableDataSource<PeriodicElement>();
 
-  constructor(private dt:TaskloaderService){}
+
+  constructor(private dt:TaskloaderService, private ch:ChekcsService){}
+  dataSource$:Observable<MatTableDataSource<PeriodicElement>> =
+  this.dt.getData.pipe(
+    map(payload =>{
+      const dataSource = this.dataSource
+      dataSource.data = payload
+      return dataSource
+    })
+  )
+  ;
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -74,20 +35,23 @@ export class TasktableComponent {
   }
 
   handleCheck(element: PeriodicElement) {
-    element.check = !element.check;
+  
+    element.check = !element.check
 
-    if (element.check) {
-      this.selectedItems.push(element);
-      this.dt.setData = this.selectedItems
-      
+    if(element.check){
+      this.selectedItems.push(element)
+      this.ch.setChecks = this.selectedItems  
     } else {
-      const index = this.selectedItems.findIndex(
-        v => v.position == element.position
-      );
-      this.selectedItems.splice(index, 1);
-      this.dt.setData = this.selectedItems
-      console.log(index);
-    }
+        const index = this.selectedItems.findIndex(
+          v => v.position == element.position
+        );
+        this.selectedItems.splice(index, 1);
+        this.ch.setChecks = this.selectedItems
+        console.log(index);
+      }
+    
+
+    
     
     console.log(this.selectedItems);
   }
