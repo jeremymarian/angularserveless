@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Firestore, collection, addDoc, } from '@angular/fire/firestore'; 
+
+
+
 
 @Component({
   selector: 'app-createtask',
@@ -8,13 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreatetaskComponent {
   formData!: FormGroup;
-  onSubmit(event: Event) {
-    console.log(this.formData.value);
-    const target = event.currentTarget as HTMLFormElement;
-    target.reset();
-    return this.formData.reset();
-  }
-  constructor(private form: FormBuilder) {
+  
+  constructor(private form: FormBuilder, private lead:Firestore) {
     this.formData = this.form.group({
       name: this.form.control('', Validators.required),
       category: this.form.control('', Validators.required),
@@ -23,5 +22,13 @@ export class CreatetaskComponent {
         Validators.requiredTrue,
       ]),
     });
+  }
+  async onSubmit(event: Event) {
+    console.log(this.formData.value);
+    const target = event.currentTarget as HTMLFormElement;
+    const refer = await addDoc(collection(this.lead,"prueba"), this.formData.value)
+    console.log('document written with id', refer.id)
+    target.reset();
+    return this.formData.reset();
   }
 }

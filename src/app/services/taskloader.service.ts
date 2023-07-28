@@ -11,7 +11,7 @@ export class TaskloaderService {
   private dataLoader: BehaviorSubject<PeriodicElement[]> = new BehaviorSubject<
     PeriodicElement[]
   >([]);
-  private API_URL = environment.apiUrl;
+
 
   constructor(private http: HttpClient) {}
 

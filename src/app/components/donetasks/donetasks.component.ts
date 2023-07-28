@@ -26,7 +26,7 @@ export class DonetasksComponent implements OnDestroy {
         let selectedItems = this.selectedItems;
         dataSource.data = things;
         selectedItems.push(...things)
-        return dataSource || selectedItems })
+        return dataSource })
     );
 
   displayedColumns: string[] = ['position', 'name', 'category'];

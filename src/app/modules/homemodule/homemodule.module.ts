@@ -14,7 +14,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { BackendbuttComponent } from '../../components';
-
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../../../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -36,6 +39,10 @@ import { BackendbuttComponent } from '../../components';
     MatButtonModule,
     MatCheckboxModule,
     HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
+ 
   ],
   
 })
