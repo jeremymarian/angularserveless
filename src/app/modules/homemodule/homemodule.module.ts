@@ -20,6 +20,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
+
 @NgModule({
   declarations: [
     HomecomponentComponent,
@@ -44,6 +45,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     provideFirestore(() => getFirestore())
  
   ],
+
   
 })
 export class HomemoduleModule {}
