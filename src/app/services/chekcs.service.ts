@@ -16,6 +16,8 @@ export class ChekcsService {
 
   set setChecks(data:PeriodicElement[]){
     this.checkLoader.next(data)
+    
   }
 
-}
+
+  }

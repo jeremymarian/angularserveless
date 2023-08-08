@@ -1,44 +1,109 @@
-<ng-container>
-  <mat-toolbar>
+<ng-container [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="example-toolbar">
     <button
       mat-icon-button
       class="example-icon"
-      (click)="sidenav.toggle()"
+      (click)="snav.toggle()"
       aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Sala de baterias</span>
+    <span>Sala de baterias - {{ name }}</span>
     <span class="example-spacer"></span>
     <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-    (click)="openDial('500ms', '500ms')">
-    <mat-icon>add_circle_outline</mat-icon>
-  </button>
-    <button
+      *ngIf="switched"
       mat-icon-button
       class="example-icon favorite-icon"
-      aria-label="Example icon-button with heart icon"
-      (click)="openDialog('500ms', '500ms')">
-      <mat-icon>favorite</mat-icon>
+      aria-label="Example icon-button with circle icon"
+      (click)="openDial('500ms', '500ms')">
+      <mat-icon
+        style="font-size: xx-large; height: fit-content; width: fit-content"
+        class="d-flex justify-content-center aling-items-center"
+        >add_circle_outline</mat-icon
+      >
     </button>
     <button
+    *ngIf="switched || token"
       mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with battery icon"
+      (click)="openDialog('500ms', '500ms')">
+      <mat-icon
+        style="font-size: xx-large; height: fit-content; width: fit-content"
+        class="d-flex justify-content-center aling-items-center"
+        >battery_charging_full</mat-icon
+      >
+    </button>
+    <button
+      *ngIf="switched"
+      mat-icon-button
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with sign icon"
+      (click)="openUser('500ms', '500ms')">
+      <mat-icon
+        style="font-size: xx-large; height: fit-content; width: fit-content"
+        class="d-flex justify-content-center aling-items-center"
+        >person_add</mat-icon
+      >
+    </button>
+    <button
+    *ngIf="!switched"
+      mat-icon-button
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with login icon"
+      (click)="loginUser('500ms', '500ms')">
+      <mat-icon
+        style="font-size: xx-large; height: fit-content; width: fit-content"
+        class="d-flex justify-content-center aling-items-center"
+        >person_pin</mat-icon
+      >
+    </button>
+    <button
+      *ngIf="switched"
+      mat-icon-button
+      (click)="prueba()"
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with table icon">
+      <mat-icon
+        style="font-size: xx-large; height: fit-content; width: fit-content;"
+        class="d-flex justify-content-center aling-items-center"
+        >table_chart</mat-icon
+      >
     </button>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side"  class="example-sidenav">
-      <button mat-button color="secondary" class="p-5 w-100">Cargar bateria</button>
-      <button mat-button color="secondary" class="p-5 w-100">Listado de baterias</button>
-      <button mat-button color="secondary" class="p-5 w-100">Aptas</button>
-      <button mat-button color="secondary" class="p-5 w-100">Pendientes de reparacion</button>
-      <button mat-button color="secondary" class="p-5 w-100">Baterias ingresadas</button>
-      <button mat-button color="secondary" class="p-5 w-100">Observaciones del sector</button>
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      class="example-sidenav">
+      <div style="position: relative; top: 100px">
+        <h3
+          style="position: relative; top: 100%; margin: 41vh 0 16px"
+          class="d-flex justify-content-center"
+          *ngIf="!token">
+          Auntenticación requerida
+        </h3>
+        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
+          Listado de baterias
+        </button>
+        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
+          Cargar bateria
+        </button>
+        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
+          Aptas
+        </button>
+        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
+          Pendientes de reparacion
+        </button>
+        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
+          Baterias ingresadas
+        </button>
+        <button *ngIf="token" mat-button color="secondary" class="p-5 w-100">
+          Observaciones del sector
+        </button>
+      </div>
     </mat-sidenav>
 
     <mat-sidenav-content class="vh-100">

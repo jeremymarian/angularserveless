@@ -18,6 +18,7 @@ export class CreatetaskComponent {
       name: this.form.control('', Validators.required),
       category: this.form.control('', Validators.required),
       check: this.form.control(false),
+      user:''
     });
   }
   async onSubmit(event: Event) {

@@ -1,0 +1,61 @@
+<div class="d-flex h-100 align-items-center justify-content-center">
+  <form
+    class="d-inline-flex flex-column w-75"
+    (reset)="(formData)"
+    [formGroup]="formData"
+    (ngSubmit)="onSubmit($event)">
+    <h2 style="color: aliceblue;" class="d-flex justify-content-center">Creacion de Usuarios</h2>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" /> </mat-form-field
+    >
+    <div *ngIf="formData.get('name')?.errors && formData.get('name')?.dirty">
+      <p style="color: aliceblue;" *ngIf="formData.get('name')?.hasError('required')">
+        Campo obligatorio
+      </p>
+    </div>
+    <mat-form-field>
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="lastname" /> </mat-form-field
+    >
+    <div *ngIf="formData.get('lastname')?.dirty">
+      <p style="color: aliceblue;" *ngIf="formData.get('lastname')?.hasError('required')">
+        Campo obligatorio
+      </p>
+    </div>
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <input matInput formControlName="email" placeholder="" /> </mat-form-field
+    >
+    <div *ngIf="formData.get('email')?.dirty">
+      <p style="color: aliceblue;" *ngIf="formData.get('email')?.hasError('email')">
+        Formato email 'example@csud.baterias'
+      </p>
+      <p style="color: aliceblue;" *ngIf="formData.get('email')?.hasError('required')">
+        Campo obligatorio
+      </p>
+    </div>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="password"
+        placeholder="" /> </mat-form-field>
+    <div *ngIf="formData.get('password')?.dirty">
+      <p style="color: aliceblue;" *ngIf="formData.get('password')?.hasError('required')">
+        Campo obligatorio
+      </p>
+      <p style="color: aliceblue;" *ngIf="formData.get('password')?.hasError('minlength')">
+        6 caracteres como minimo
+      </p>
+      <p style="color: aliceblue;" *ngIf="formData.get('password')?.hasError('maxlength')">
+        8 caracteres como maximo
+      </p>
+    </div>
+    <br />
+    <button mat-button color="warn" type="submit" [disabled]="formData.invalid">
+      Crear Usuario
+    </button>
+  </form>
+</div>

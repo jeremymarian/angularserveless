@@ -1,4 +1,4 @@
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -8,16 +8,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
   MatDialog,
-  MatDialogRef,
   MatDialogModule,
 } from '@angular/material/dialog';
 import { DonetasksComponent } from '../donetasks';
 import { CreatetaskComponent } from '../createtask';
-
+import { MediaMatcher } from '@angular/cdk/layout';
+import { NewuserComponent } from '../newuser';
+import { LoginComponent } from '../login';
+import { TaskloaderService } from 'src/app/services';
 @Component({
   standalone: true,
   imports: [
@@ -40,8 +42,22 @@ import { CreatetaskComponent } from '../createtask';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
-  constructor(public dialog: MatDialog) {}
+export class NavbarComponent implements OnDestroy {
+  private adRef = 'KrLXM8n6CvRWM6ln0BqaO1IvBnh2'
+  token:string | null  = sessionStorage.getItem('')
+  switched:boolean = this.token === this.adRef
+  mobileQuery: MediaQueryList;
+  name:string | null = sessionStorage.getItem('name')
+  prueba = this.pb.downloadExcel('prueba')
+
+  private _mobileQueryListener: () => void;
+
+  constructor(public dialog: MatDialog,changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private pb:TaskloaderService) {
+    this.mobileQuery = media.matchMedia('(max-width: 1190px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener('click', this._mobileQueryListener);
+    console.log(this.switched)
+  }
 
   openDialog(
     enterAnimationDuration: string,
@@ -64,6 +80,31 @@ export class NavbarComponent {
       enterAnimationDuration,
       exitAnimationDuration,
     });
+  }
+  openUser(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(NewuserComponent, {
+      width: '500px',
+      height: '600px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+  loginUser(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(LoginComponent, {
+      width: '500px',
+      height: '400px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+  ngOnDestroy(): void {
+    this.mobileQuery.removeEventListener('click', this._mobileQueryListener);
   }
 }
 

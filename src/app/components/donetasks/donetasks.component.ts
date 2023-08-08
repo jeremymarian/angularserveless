@@ -13,8 +13,9 @@ import { Observable, map } from 'rxjs';
   styleUrls: ['./donetasks.component.scss'],
 })
 export class DonetasksComponent implements OnDestroy {
-  private dataSource = new MatTableDataSource<any>();
-  selectedItems: any[] = [];
+  private dataSource = new MatTableDataSource<PeriodicElement>();
+  selectedItems: PeriodicElement[] = [];
+  
   constructor(
     private ch: ChekcsService
   ) {}
@@ -28,6 +29,9 @@ export class DonetasksComponent implements OnDestroy {
         selectedItems.push(...things)
         return dataSource })
     );
+
+   
+    
 
   displayedColumns: string[] = ['name', 'category'];
 

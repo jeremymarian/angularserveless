@@ -3,5 +3,6 @@ export interface PeriodicElement {
     position: number;
     category: string;
     check: boolean | undefined;
+    user: string
   }
   

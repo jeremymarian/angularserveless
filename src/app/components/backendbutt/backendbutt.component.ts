@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TaskloaderService } from 'src/app/services';
+import { ChekcsService, TaskloaderService } from 'src/app/services';
 
 @Component({
   selector: 'app-backendbutt',
@@ -8,11 +8,37 @@ import { TaskloaderService } from 'src/app/services';
 })
 export class BackendbuttComponent {
   @Input() selectedItems!: any[];
-
-  constructor(private dt: TaskloaderService) {
+  load:Boolean = false
+  constructor(
+    private dt: TaskloaderService,
+    private ck: ChekcsService
+  ) {
     this.onSubmit;
   }
   onSubmit() {
     this.dt.setData(this.selectedItems);
+    setTimeout(()=>{
+      this.load = true
+    })
   }
+
+  deleteDocs() {
+    this.dt.deleted(this.selectedItems);
+  }
+
+  cleanCheck() {
+      this.load = true
+      let cleanedChecks = this.selectedItems.map(e => {
+        return (e.check = false as any);
+      });
+  
+      this.ck.setChecks = cleanedChecks;
+  
+      this.ck.setChecks = [];
+      
+     
+      document.location.reload();
+    }
+    
+  
 }

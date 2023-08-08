@@ -7,6 +7,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angularpractice1';
+  tester = document.location.href
+  offSet = true
+  constructor(){console.log(this.tester)
+  
+    if(this.tester === 'http://localhost:4200/'){
+    this.offSet = false
+    }
+
+    else{
+      this.offSet = true
+    }
+  
+  }
+  
   
  
 }

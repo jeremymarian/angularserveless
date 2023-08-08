@@ -4,39 +4,40 @@
     <input
       matInput
       (keyup)="applyFilter($event)"
-      placeholder="Ex. ium"
+      placeholder="Puedes ingresar cualquier dato que pertenezca  a cada campo para realizar la busqueda"
       #input />
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <!-- Position Column -->
     <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
       <td mat-cell *matCellDef="let element">{{ element.position }}</td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+    <ng-container matColumnDef="name" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef>Category</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
       <td mat-cell *matCellDef="let element">{{ element.category }}</td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="check">
-      <th mat-header-cell *matHeaderCellDef>Checked</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Checked</th>
       <td mat-cell *matCellDef="let element">
         <input
           class="form-check-input"
           type="checkbox"
           id="flexCheckChecked"
           [checked]="element.check"
-          (change)="handleCheck(element)" />
+          (change)="handleCheck(element)"
+          [disabled]="isDisabled(element)" />
           
       </td>
     </ng-container>

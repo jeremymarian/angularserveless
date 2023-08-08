@@ -1,34 +1,28 @@
 <div class="d-flex h-100 align-items-center justify-content-center">
   <form
-    class="d-inline-flex flex-column"
+    class="d-inline-flex flex-column w-50"
     (reset)="(formData)"
     [formGroup]="formData"
     (ngSubmit)="onSubmit($event)">
+    <h2 style="color: aliceblue;" class="d-flex justify-content-center">Ingresar Bateria</h2>
     <mat-form-field>
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" /> </mat-form-field
-    ><br />
+    >
     <div *ngIf="formData.get('name')?.errors && formData.get('name')?.dirty">
-      <p *ngIf="formData.get('name')?.hasError('required')">
+      <p style="color: aliceblue;" *ngIf="formData.get('name')?.hasError('required')">
         El campo es requerido
       </p>
     </div>
-    <br />
-
     <mat-form-field>
       <mat-label>Category</mat-label>
       <input matInput formControlName="category" /> </mat-form-field
-    ><br />
+    >
     <div *ngIf="formData.get('category')?.dirty">
-      <p *ngIf="formData.get('category')?.hasError('required')">
+      <p style="color: aliceblue;" *ngIf="formData.get('category')?.hasError('required')">
         El campo es requerido
       </p>
     </div>
-    <br />
-
-    <mat-checkbox formControlName="check">Check me! </mat-checkbox>
-    <br />
-
     <br />
     <button mat-button color="warn" type="submit" [disabled]="formData.invalid">
       Add Task
