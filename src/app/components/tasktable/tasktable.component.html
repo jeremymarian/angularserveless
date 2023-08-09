@@ -10,33 +10,137 @@
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
-      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+    <ng-container matColumnDef="Numero">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.Numero }}</td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="name" >
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <ng-container matColumnDef="Marca" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Marca</th>
+      <td mat-cell *matCellDef="let element">{{ element.Marca }}</td>
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-      <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+    <ng-container matColumnDef="Voltaje">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">V/a</th>
+      <td mat-cell *matCellDef="let element">{{ element.Voltaje }}</td>
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="check">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Checked</th>
+    <ng-container matColumnDef="Tapa">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Tapa</th>
       <td mat-cell *matCellDef="let element">
         <input
           class="form-check-input"
           type="checkbox"
-          id="flexCheckChecked"
-          [checked]="element.check"
-          (change)="handleCheck(element)"
+          id="flexCheckChecked8"
+          (change)="handleCheckboxChange(element, 'Tapa')"
+          [checked]="element.Tapa"
+          [disabled]="isDisabled(element)" />
+          
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Cable">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Cable</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          (change)="handleCheckboxChange(element, 'Cable')"
+          id="flexCheckChecked7"
+          [checked]="element.Cable"
+          [disabled]="isDisabled(element)" />
+          
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Ficha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Ficha</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked6"
+          (change)="handleCheckboxChange(element, 'Ficha')"
+          [checked]="element.Ficha"
+          [disabled]="isDisabled(element)" />
+          
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Terminal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Terminal</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked5"
+          (change)="handleCheckboxChange(element, 'Terminal')"
+          [checked]="element.Terminal"
+          [disabled]="isDisabled(element)" />
+          
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Puente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Puente</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked4"
+          (change)="handleCheckboxChange(element, 'Puente')"
+          [checked]="element.Puente"
+          [disabled]="isDisabled(element)" />
+          
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Limpieza">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Limpieza</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked3"
+          (change)="handleCheckboxChange(element, 'Limpieza')"
+          [checked]="element.Limpieza"
+          [disabled]="isDisabled(element)" />
+          
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="AguaDest">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Agua Dest</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked2"
+          (change)="handleCheckboxChange(element, 'AguaDest')"
+          [checked]="element.AguaDest"
+          [disabled]="isDisabled(element)" />
+          
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Turno">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Turno</th>
+      <td mat-cell *matCellDef="let element">{{ element.Turno }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Fecha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Fecha</th>
+      <td mat-cell *matCellDef="let element">{{ element.Fecha }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Novedades">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Novedades</th>
+      <td mat-cell *matCellDef="let element">{{ element.Novedaes }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Send">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="headers">Enviar</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked1"
+          [checked]="element.Send"
+          (change)="handleCheckboxChange(element,'Send')"
           [disabled]="isDisabled(element)" />
           
       </td>

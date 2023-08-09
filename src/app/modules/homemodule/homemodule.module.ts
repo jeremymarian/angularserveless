@@ -21,6 +21,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -50,6 +52,8 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
         MatCheckboxModule,
         HttpClientModule,
         MatProgressSpinnerModule,
+        MatOptionModule,
+        MatSelectModule,
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore()),

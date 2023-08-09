@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { PeriodicElement } from '../interfaces';
+import { BehaviorSubject } from 'rxjs';
+import { NewBat } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChekcsService {
-  private checkLoader: BehaviorSubject<PeriodicElement[]> =
-    new BehaviorSubject<PeriodicElement[]>([]);
+  private checkLoader: BehaviorSubject<NewBat[]> =
+    new BehaviorSubject<NewBat[]>([]);
   constructor() {}
 
   get getChecks(){
     return this.checkLoader.asObservable()
   }
 
-  set setChecks(data:PeriodicElement[]){
+  set setChecks(data:NewBat[]){
     this.checkLoader.next(data)
     
   }

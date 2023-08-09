@@ -6,24 +6,37 @@
     (ngSubmit)="onSubmit($event)">
     <h2 style="color: aliceblue;" class="d-flex justify-content-center">Ingresar Bateria</h2>
     <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" /> </mat-form-field
+      <mat-label>Numero</mat-label>
+      <input matInput formControlName="Numero" /> </mat-form-field
     >
-    <div *ngIf="formData.get('name')?.errors && formData.get('name')?.dirty">
-      <p style="color: aliceblue;" *ngIf="formData.get('name')?.hasError('required')">
+    <div *ngIf="formData.get('Numero')?.errors && formData.get('Numero')?.dirty">
+      <p style="color: aliceblue;" *ngIf="formData.get('Numero')?.hasError('required')">
         El campo es requerido
       </p>
     </div>
     <mat-form-field>
-      <mat-label>Category</mat-label>
-      <input matInput formControlName="category" /> </mat-form-field
+      <mat-label>Marca</mat-label>
+      <mat-select formControlName="Marca">
+        <mat-option *ngFor="let option of marcaOptions" [value]="option">{{option}}</mat-option>
+      </mat-select> </mat-form-field
     >
-    <div *ngIf="formData.get('category')?.dirty">
-      <p style="color: aliceblue;" *ngIf="formData.get('category')?.hasError('required')">
+    <div *ngIf="formData.get('Marca')?.dirty">
+      <p style="color: aliceblue;" *ngIf="formData.get('Marca')?.hasError('required')">
         El campo es requerido
       </p>
     </div>
     <br />
+    <mat-form-field>
+      <mat-label>V/a</mat-label>
+      <mat-select formControlName="Voltaje">
+        <mat-option *ngFor="let option of valOptions" [value]="option">{{option}}</mat-option>
+      </mat-select> </mat-form-field
+    >
+    <div *ngIf="formData.get('Voltaje')?.dirty">
+      <p style="color: aliceblue;" *ngIf="formData.get('Voltaje')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
     <button mat-button color="warn" type="submit" [disabled]="formData.invalid">
       Add Task
     </button>

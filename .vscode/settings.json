@@ -17,5 +17,7 @@
     
   "editor.suggest.snippetsPreventQuickSuggestions": false,
   "editor.inlineSuggest.enabled": true,
-  "exportall.config.folderListener": []
+  "exportall.config.folderListener": [
+    "/src/app/interfaces"
+  ]
   }

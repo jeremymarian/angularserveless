@@ -48,7 +48,7 @@ export class NavbarComponent implements OnDestroy {
   switched:boolean = this.token === this.adRef
   mobileQuery: MediaQueryList;
   name:string | null = sessionStorage.getItem('name')
-  prueba = this.pb.downloadExcel('prueba')
+  prueba = this.pb.downloadExcel('baterias-6166')
 
   private _mobileQueryListener: () => void;
 

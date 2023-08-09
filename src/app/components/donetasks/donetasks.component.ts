@@ -3,7 +3,7 @@ import {
   MatTableDataSource,
   _MatTableDataSource,
 } from '@angular/material/table';
-import { PeriodicElement } from 'src/app/interfaces';
+import { NewBat } from 'src/app/interfaces';
 import { ChekcsService } from 'src/app/services';
 import { Observable, map } from 'rxjs';
 
@@ -13,14 +13,12 @@ import { Observable, map } from 'rxjs';
   styleUrls: ['./donetasks.component.scss'],
 })
 export class DonetasksComponent implements OnDestroy {
-  private dataSource = new MatTableDataSource<PeriodicElement>();
-  selectedItems: PeriodicElement[] = [];
-  
+  private dataSource = new MatTableDataSource<NewBat>();
+  selectedItems: NewBat[] = [];
   constructor(
     private ch: ChekcsService
   ) {}
-
-  thingsAsMatTableDataSource$: Observable<MatTableDataSource<PeriodicElement>> =
+  thingsAsMatTableDataSource$: Observable<MatTableDataSource<NewBat>> =
     this.ch.getChecks.pipe(
       map(things => {
         const dataSource = this.dataSource;
@@ -29,12 +27,7 @@ export class DonetasksComponent implements OnDestroy {
         selectedItems.push(...things)
         return dataSource })
     );
-
-   
-    
-
-  displayedColumns: string[] = ['name', 'category'];
-
+  displayedColumns: string[] = ['Numero', 'Marca'];
   ngOnDestroy(): void {
     this.ch.getChecks.subscribe().unsubscribe();
   }

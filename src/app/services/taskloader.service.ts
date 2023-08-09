@@ -9,7 +9,7 @@ import {
 import { deleteDoc, query, where } from '@angular/fire/firestore';
 import { Firestore, collection, getDocs } from '@angular/fire/firestore';
 import { writeBatch, doc } from '@angular/fire/firestore';
-import { newUser, loginUser, PeriodicElement } from '../interfaces';
+import { newUser, loginUser, NewBat } from '../interfaces';
 import * as ExcelJS from 'exceljs';
 
 @Injectable({
@@ -22,24 +22,45 @@ export class TaskloaderService {
   ) {}
 
   downloadExcel(collectionName: string) {
-    const exportToExcel = async () => {
-      const workbook = new ExcelJS.Workbook();
-      const worksheet = workbook.addWorksheet('Datos');
-
-      const q = query(collection(this.pb, `${collectionName}`));
-
+    return async () => {
       try {
+        const fieldOrder = [
+          "Numero",
+          "Marca",
+          "Voltaje",
+          "Tapa",
+          "Cable",
+          "Ficha",
+          "Terminal",
+          "Puente",
+          "Limpieza",
+          "AguaDest",
+          "Turno",
+          "Fecha",
+          "Novedades",
+          "Enviar"
+        ];
+  
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Datos');
+        const q = query(collection(this.pb, collectionName));
+  
         const querySnapshot = await getDocs(q);
-        const headers = Object.keys(querySnapshot.docs[0].data());
+  
+        // Add headers based on the specified field order
+        const headers = fieldOrder;
         worksheet.addRow(headers);
-
-        querySnapshot.forEach(doc => {
-          const rowData = headers.map(header => doc.data()[header])
-          worksheet.addRow(rowData)})
+  
+        for (const doc of querySnapshot.docs) {
+          const rowData = fieldOrder.map(field => doc.data()[field]);
+          worksheet.addRow(rowData);
+        }
+  
         const excelBuffer = await workbook.xlsx.writeBuffer();
         const excelBlob = new Blob([excelBuffer], {
           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         });
+  
         const excelBlobUrl = URL.createObjectURL(excelBlob);
         const a = document.createElement('a');
         a.href = excelBlobUrl;
@@ -49,54 +70,69 @@ export class TaskloaderService {
         console.error('Error al exportar a Excel:', error);
       }
     };
-    return exportToExcel;
   }
 
   getData() {
-    return getDocs(collection(this.pb, 'prueba'));
+    return getDocs(collection(this.pb, 'baterias-6166'));
   }
 
-  setData(param: PeriodicElement[]) {
-    console.log(param)
+  setData(param: NewBat[]) {
+    console.log(param);
     const data = param.forEach(async e => {
       const batch = writeBatch(this.pb);
       const q = query(
-        collection(this.pb, 'prueba'),
-        where('name', '==', e.name),
-        where('category', '==', e.category),
-        where('user',"==","")
+        collection(this.pb, 'baterias-6166'),
+        where('Numero', '==', e.Numero),
+        where('Marca', '==', e.Marca),
+        where('user', '==', e.user)
       );
       const querySnapshot = await getDocs(q);
       const ids = querySnapshot.docs[0].ref.id;
-      const docRef = doc(this.pb, 'prueba', ids);
+      const docRef = doc(this.pb, 'baterias-6166', ids);
       const getUser = getAuth().currentUser?.displayName;
-      batch.update(docRef, { check: e.check, user: getUser });
+      batch.update(docRef, { 
+        Send: e.Send, 
+        user: getUser,
+        Numero:e.Numero,
+        Marca:e.Marca,
+        Voltaje:e.Voltaje,
+        Tapa:e.Tapa,
+        Cable:e.Cable,
+        Ficha:e.Ficha,
+        Terminal:e.Terminal,
+        Puente:e.Puente,
+        Limpieza:e.Limpieza,
+        AguaDest:e.AguaDest,
+        Turno:e.Turno,
+        Fecha:e.Fecha,
+        Novedades:e.Novedades
+     });
 
       return batch
         .commit()
         .then(() => {
           console.log('Documentos actualizados en Firestore.');
-          document.location.reload()
+          document.location.reload();
         })
         .catch(error => {
           console.error('Error al actualizar documentos:', error);
         });
     });
-  
   }
 
-  deleted(param: any[]) {
+  deleted(param: NewBat[]) {
     param.forEach(async e => {
       const q = query(
-        collection(this.pb, 'prueba'),
-        where('name', '==', e.name),
-        where('category', '==', e.category)
+        collection(this.pb, 'baterias-6166'),
+        where('Numero', '==', e.Numero),
+        where('Marca', '==', e.Marca),
+        where('user', '==', e.user)
       );
       const querySnapshot = await getDocs(q);
       const ids = querySnapshot.docs[0].ref.id;
-      const docRef = doc(this.pb, 'prueba', ids);
-      deleteDoc(docRef);
-      setTimeout(() => document.location.reload(), 3000);
+      const docRef = doc(this.pb, 'baterias-6166', ids);
+      await deleteDoc(docRef);
+      document.location.reload();
     });
   }
   createUser(param: newUser) {
@@ -124,22 +160,3 @@ export class TaskloaderService {
       .catch(e => console.error(e));
   }
 }
-/*getAuth(createUserWithEmailAndPassword(Auth,""))
-  createUser({
-    email: 'user@example.com',
-    emailVerified: false,
-    phoneNumber: '+11234567890',
-    password: 'secretPassword',
-    displayName: 'John Doe',
-    photoURL: 'http://www.example.com/12345678/photo.png',
-    disabled: false,
-  })
-  .then((userRecord) => {
-    // See the UserRecord reference doc for the contents of userRecord.
-    console.log('Successfully created new user:', userRecord.uid);
-  })
-  .catch((error) => {
-    console.log('Error creating new user:', error);
-  });
-
-  }*/
