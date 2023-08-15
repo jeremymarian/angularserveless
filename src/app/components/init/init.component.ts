@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 export class InitComponent {
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
 
   redireccionar(): void {
     document.location.href = '/home';

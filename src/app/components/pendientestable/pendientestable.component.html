@@ -1,0 +1,43 @@
+<h1 class="d-flex justify-content-center">Baterias en Reparacion</h1>
+<p *ngIf="showIt" class="d-flex justify-content-center">
+  Selecciona entre 24v o 48v
+</p>
+<div class="d-flex justify-content-center">
+  <button mat-button color="warn" class="mb-2" (click)="downloadExcel()">
+    Descargar Excel
+  </button>
+</div>
+
+<div *ngIf="dataSource" class="table-responsive">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Interno">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.Interno }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Marca">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
+      <td mat-cell *matCellDef="let element">{{ element.Marca }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Voltaje">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>V/a</th>
+      <td mat-cell *matCellDef="let element">{{ element.Voltaje }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Novedades">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center">
+        Novedades
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        style="text-align: center; min-width: 50px">
+        {{ element.Novedades }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

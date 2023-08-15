@@ -1,44 +1,170 @@
-<div class="d-flex h-100 align-items-center justify-content-center">
+<div class="d-flex align-items-center justify-content-center p-3">
   <form
     class="d-inline-flex flex-column w-50"
     (reset)="(formData)"
     [formGroup]="formData"
     (ngSubmit)="onSubmit($event)">
-    <h2 style="color: aliceblue;" class="d-flex justify-content-center">Ingresar Bateria</h2>
+    <h2 style="color: aliceblue" class="d-flex justify-content-center">
+      Ingresar Bateria
+    </h2>
     <mat-form-field>
-      <mat-label>Numero</mat-label>
-      <input matInput formControlName="Numero" /> </mat-form-field
-    >
-    <div *ngIf="formData.get('Numero')?.errors && formData.get('Numero')?.dirty">
-      <p style="color: aliceblue;" *ngIf="formData.get('Numero')?.hasError('required')">
+      <mat-label>Interno</mat-label>
+      <input matInput formControlName="Interno" />
+    </mat-form-field>
+    <div
+      *ngIf="formData.get('Interno')?.errors && formData.get('Interno')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('Interno')?.hasError('required')">
         El campo es requerido
       </p>
     </div>
     <mat-form-field>
       <mat-label>Marca</mat-label>
-      <mat-select formControlName="Marca">
-        <mat-option *ngFor="let option of marcaOptions" [value]="option">{{option}}</mat-option>
-      </mat-select> </mat-form-field
-    >
+      <input matInput formControlName="Marca" [value]="" />
+    </mat-form-field>
     <div *ngIf="formData.get('Marca')?.dirty">
-      <p style="color: aliceblue;" *ngIf="formData.get('Marca')?.hasError('required')">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('Marca')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Serie</mat-label>
+      <input matInput formControlName="Serie" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('Serie')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('Serie')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Modelo</mat-label>
+      <input matInput formControlName="Modelo" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('Modelo')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('Modelo')?.hasError('required')">
         El campo es requerido
       </p>
     </div>
     <br />
     <mat-form-field>
       <mat-label>V/a</mat-label>
-      <mat-select formControlName="Voltaje">
-        <mat-option *ngFor="let option of valOptions" [value]="option">{{option}}</mat-option>
-      </mat-select> </mat-form-field
-    >
+      <input matInput formControlName="Voltaje" readonly [value]="valOptions" />
+    </mat-form-field>
     <div *ngIf="formData.get('Voltaje')?.dirty">
-      <p style="color: aliceblue;" *ngIf="formData.get('Voltaje')?.hasError('required')">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('Voltaje')?.hasError('required')">
         El campo es requerido
       </p>
     </div>
+    <br />
+    <mat-form-field>
+      <mat-label>A/H</mat-label>
+      <input matInput formControlName="Amper" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('Amper')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('Amper')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Tipo de Puente</mat-label>
+      <input matInput formControlName="TipoDePuente" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('TipoDePuente')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('TipoDePuente')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Tipo de Conector</mat-label>
+      <input matInput formControlName="TipoDeConector" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('TipoDeConector')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('TipoDeConector')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Sistema de Agua</mat-label>
+      <input matInput formControlName="SistemaDeAgua" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('SistemaDeAgua')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('SistemaDeAgua')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Medidas de Cable</mat-label>
+      <input matInput formControlName="MedidasCable" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('MedidasCable')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('MedidasCable')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Año de Ingreso</mat-label>
+      <input matInput type="date" formControlName="AñoDeIngreso" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('AñoDeIngreso')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('AñoDeIngreso')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Ubicacion</mat-label>
+      <input matInput formControlName="Ubicacion" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('Ubicacion')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('Ubicacion')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <mat-form-field>
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="Estado" readonly [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('Estado')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('Estado')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
     <button mat-button color="warn" type="submit" [disabled]="formData.invalid">
-      Add Task
+      Crear registro
     </button>
   </form>
 </div>

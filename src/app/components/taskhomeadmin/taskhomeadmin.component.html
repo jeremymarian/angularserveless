@@ -1,0 +1,119 @@
+<div class="flex-column w-100">
+  <h1 class="d-flex justify-content-center">Control en Checklist</h1>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Buscar Interno"
+      #input />
+  </mat-form-field>
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <ng-container matColumnDef="Interno">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.Interno }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Marca">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
+        <td mat-cell *matCellDef="let element">{{ element.Marca }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Serie">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>No.Serie</th>
+        <td mat-cell *matCellDef="let element">{{ element.Serie }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Modelo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
+        <td mat-cell *matCellDef="let element">{{ element.Modelo }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Voltaje">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>V/a</th>
+        <td mat-cell *matCellDef="let element">{{ element.Voltaje }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Amper">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>A/H</th>
+        <td mat-cell *matCellDef="let element">{{ element.Amper }}</td>
+      </ng-container>
+      <ng-container matColumnDef="TipoDePuente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Tipo de Puente
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.TipoDePuente }}</td>
+      </ng-container>
+      <ng-container matColumnDef="TipoDeConector">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Tipo de Conector
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.TipoDeConector }}</td>
+      </ng-container>
+      <ng-container matColumnDef="SistemaDeAgua">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Sistema de Agua
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.SistemaDeAgua }}</td>
+      </ng-container>
+      <ng-container matColumnDef="MedidasCable">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Medidas de Cable
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.MedidasCable }}</td>
+      </ng-container>
+      <ng-container matColumnDef="AñoDeIngreso">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Fecha de Ingreso
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <input [(ngModel)]="element['AñoDeIngreso']" readonly type="date" />
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Ubicacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ubicacion</th>
+        <td mat-cell *matCellDef="let element">{{ element.Ubicacion }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Estado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-select style="width: 200px" [(ngModel)]="element.Estado">
+            <mat-option
+              *ngFor="let option of primerosEstados"
+              [value]="option"
+              >{{ option }}</mat-option
+            >
+          </mat-select>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Send">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Control</th>
+        <td mat-cell *matCellDef="let element">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="flexCheckChecked1"
+            [checked]="element.Send"
+            (change)="handleCheckboxChange(element, 'Send')" />
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Unsend">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Disponer</th>
+        <td mat-cell *matCellDef="let element">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="flexCheckChecked1"
+            [checked]="element.Unsend"
+            (change)="handleCheckboxFalse(element, 'Unsend')" />
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          No data matching the filter "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

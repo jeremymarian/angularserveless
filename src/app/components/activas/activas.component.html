@@ -1,0 +1,150 @@
+<h1 class="d-flex justify-content-center">Baterias Controladas</h1>
+<p *ngIf="showIt" class="d-flex justify-content-center">
+  Selecciona entre 24v o 48v
+</p>
+<div class="d-flex justify-content-center">
+  <button mat-button color="warn" class="mb-2" (click)="downloadExcel()">
+    Descargar Excel
+  </button>
+</div>
+
+<div *ngIf="dataSource" class="table-responsive">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Interno">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.Interno }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Marca">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
+      <td mat-cell *matCellDef="let element">{{ element.Marca }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Voltaje">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>V/a</th>
+      <td mat-cell *matCellDef="let element">{{ element.Voltaje }}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Tapa">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tapa</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          readonly
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked8"
+          [checked]="element.Tapa"
+          [disabled]="true" />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Cable">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cable</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          readonly
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked7"
+          [checked]="element.Cable"
+          [disabled]="true" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Ficha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ficha</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          readonly
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked6"
+          [checked]="element.Ficha"
+          [disabled]="true" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Terminal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Terminal</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          readonly
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked5"
+          [checked]="element.Terminal"
+          [disabled]="true" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Puente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Puente</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          readonly
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked4"
+          [checked]="element.Puente"
+          [disabled]="true" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Limpieza">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Limpieza</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          readonly
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked3"
+          [checked]="element.Limpieza"
+          [disabled]="true" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="AguaDest">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Agua Dest</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          readonly
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked2"
+          [checked]="element.AguaDest"
+          [disabled]="true" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Turno">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Turno</th>
+      <td mat-cell *matCellDef="let element">
+        <input
+          readonly
+          type="text"
+          id="flexCheckChecked2"
+          [value]="element.Turno" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Fecha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+      <td mat-cell *matCellDef="let element">
+        <input readonly [(ngModel)]="element.Fecha" type="date" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Novedades">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Novedades</th>
+      <td mat-cell *matCellDef="let element">
+        <textarea
+          readonly
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="2"
+          cdkAutosizeMaxRows="5"
+          [(ngModel)]="element.Novedades"></textarea>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

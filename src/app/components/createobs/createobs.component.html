@@ -1,0 +1,26 @@
+<div class="d-flex align-items-center justify-content-center p-3">
+  <form
+    class="d-inline-flex flex-column w-50"
+    (reset)="(formData)"
+    [formGroup]="formData"
+    (ngSubmit)="onSubmit($event)">
+    <h2 style="color: aliceblue" class="d-flex justify-content-center">
+      Ingresar Observacion
+    </h2>
+    <mat-form-field>
+      <mat-label>Contenido</mat-label>
+      <input matInput formControlName="observacion" [value]="" />
+    </mat-form-field>
+    <div *ngIf="formData.get('observacion')?.dirty">
+      <p
+        style="color: aliceblue"
+        *ngIf="formData.get('observacion')?.hasError('required')">
+        El campo es requerido
+      </p>
+    </div>
+    <br />
+    <button mat-button color="warn" type="submit" [disabled]="formData.invalid">
+      Enviar
+    </button>
+  </form>
+</div>

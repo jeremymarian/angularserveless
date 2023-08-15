@@ -1,7 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+#mat-menu-panel-0 {
+  left: 200px;
+  bottom: 90px;
+}
+#mat-menu-panel-6 {
+  left: 200px;
+  bottom: 90px;
+}
+#mat-menu-panel-7 {
+  left: 200px;
+  bottom: 90px;
+}
+#mat-menu-panel-8 {
+  left: 200px;
+  bottom: 90px;
+}
+#mat-menu-panel-10 {
+  left: 200px;
+  bottom:90px;
+}
+#mat-menu-panel-11 {
+  left: 200px;
+  
+}

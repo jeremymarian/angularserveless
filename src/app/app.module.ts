@@ -16,13 +16,16 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { InitComponent } from './components/init/init.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
+import { VoltashareService } from './services/voltashare.service';
+import { AdminhomeModule } from './modules/adminhome';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, InitComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AdminhomeModule,
     HomemoduleModule,
     NavbarComponent,
     BrowserAnimationsModule,
@@ -30,12 +33,13 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     HttpClientModule,
     MatInputModule,
+    RouterModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     
   ],
-  providers: [TaskloaderService,ChekcsService],
+  providers: [TaskloaderService,ChekcsService,VoltashareService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

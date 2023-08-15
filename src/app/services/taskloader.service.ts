@@ -25,20 +25,20 @@ export class TaskloaderService {
     return async () => {
       try {
         const fieldOrder = [
-          "Numero",
+          "Interno",
+          "Tipo",
           "Marca",
+          "Serie",
+          "Modelo",
           "Voltaje",
-          "Tapa",
-          "Cable",
-          "Ficha",
-          "Terminal",
-          "Puente",
-          "Limpieza",
-          "AguaDest",
-          "Turno",
-          "Fecha",
-          "Novedades",
-          "Enviar"
+          "Amper",
+          "TipoDePuente",
+          "TipoDeConector",
+          "SistemaDeAgua",
+          "MedidasCable",
+          "AñoDeIngreso",
+          "Ubicacion",
+          "Estado",
         ];
   
         const workbook = new ExcelJS.Workbook();
@@ -82,7 +82,7 @@ export class TaskloaderService {
       const batch = writeBatch(this.pb);
       const q = query(
         collection(this.pb, 'baterias-6166'),
-        where('Numero', '==', e.Numero),
+        where('Interno', '==', e.Interno),
         where('Marca', '==', e.Marca),
         where('user', '==', e.user)
       );
@@ -93,7 +93,7 @@ export class TaskloaderService {
       batch.update(docRef, { 
         Send: e.Send, 
         user: getUser,
-        Numero:e.Numero,
+        Interno:e.Interno,
         Marca:e.Marca,
         Voltaje:e.Voltaje,
         Tapa:e.Tapa,
@@ -105,7 +105,17 @@ export class TaskloaderService {
         AguaDest:e.AguaDest,
         Turno:e.Turno,
         Fecha:e.Fecha,
-        Novedades:e.Novedades
+        Novedades:e.Novedades,
+        Serie:e.Serie,
+        Modelo:e.Modelo,
+        Amper:e.Amper,
+        TipoDePuente:e.TipoDePuente,
+        TipoDeConector:e.TipoDeConector,
+        SistemaDeAgua:e.SistemaDeAgua,
+        MedidasCable:e.MedidasCable,
+        AñoDeIngreso:e.AñoDeIngreso,
+        Ubicacion:e.Ubicacion,
+        Estado:e.Estado,
      });
 
       return batch
@@ -124,7 +134,7 @@ export class TaskloaderService {
     param.forEach(async e => {
       const q = query(
         collection(this.pb, 'baterias-6166'),
-        where('Numero', '==', e.Numero),
+        where('Interno', '==', e.Interno),
         where('Marca', '==', e.Marca),
         where('user', '==', e.user)
       );

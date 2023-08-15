@@ -27,7 +27,7 @@ export class DonetasksComponent implements OnDestroy {
         selectedItems.push(...things)
         return dataSource })
     );
-  displayedColumns: string[] = ['Numero', 'Marca'];
+  displayedColumns: string[] = ['Interno', 'Marca'];
   ngOnDestroy(): void {
     this.ch.getChecks.subscribe().unsubscribe();
   }

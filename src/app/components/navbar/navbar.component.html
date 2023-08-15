@@ -9,20 +9,20 @@
     </button>
     <span>Sala de baterias - {{ name }}</span>
     <span class="example-spacer"></span>
-    <button
+    <!-- <button
       *ngIf="switched"
       mat-icon-button
       class="example-icon favorite-icon"
       aria-label="Example icon-button with circle icon"
-      (click)="openDial('500ms', '500ms')">
+      (click)="openDial('500ms', '500ms','','')">
       <mat-icon
         style="font-size: xx-large; height: fit-content; width: fit-content"
         class="d-flex justify-content-center aling-items-center"
         >add_circle_outline</mat-icon
       >
-    </button>
+    </button> -->
     <button
-    *ngIf="switched || token"
+      *ngIf="switched || token"
       mat-icon-button
       class="example-icon favorite-icon"
       aria-label="Example icon-button with battery icon"
@@ -46,7 +46,7 @@
       >
     </button>
     <button
-    *ngIf="!switched"
+      *ngIf="!switched"
       mat-icon-button
       class="example-icon favorite-icon"
       aria-label="Example icon-button with login icon"
@@ -64,7 +64,7 @@
       class="example-icon favorite-icon"
       aria-label="Example icon-button with table icon">
       <mat-icon
-        style="font-size: xx-large; height: fit-content; width: fit-content;"
+        style="font-size: xx-large; height: fit-content; width: fit-content"
         class="d-flex justify-content-center aling-items-center"
         >table_chart</mat-icon
       >
@@ -78,36 +78,187 @@
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
       class="example-sidenav">
-      <div style="position: relative; top: 100px">
+      <div style="position: relative; top: 100px; height: fit-content">
         <h3
           style="position: relative; top: 100%; margin: 41vh 0 16px"
           class="d-flex justify-content-center"
           *ngIf="!token">
           Auntenticación requerida
         </h3>
-        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
-          Listado de baterias
+        <button
+          mat-button
+          [matMenuTriggerFor]="baterias"
+          *ngIf="switched"
+          class="p-5 w-100">
+          Baterias
         </button>
-        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
-          Cargar bateria
+        <mat-menu #baterias="matMenu" id="custom">
+          <button mat-menu-item [matMenuTriggerFor]="listado">
+            Listado General
+          </button>
+          <button mat-menu-item [matMenuTriggerFor]="insertar">Insertar</button>
+        </mat-menu>
+
+        <mat-menu #listado="matMenu">
+          <button mat-menu-item routerLink="/table">Baterias</button>
+          <button mat-menu-item>Cargadores</button>
+        </mat-menu>
+
+        <mat-menu #insertar="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="insert">Baterias</button>
+          <button mat-menu-item>Cargadores</button>
+        </mat-menu>
+
+        <mat-menu #insert="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="charge">Nueva</button>
+          <button mat-menu-item [matMenuTriggerFor]="charges">Alquiler</button>
+        </mat-menu>
+        <mat-menu #charge="matMenu">
+          <button
+            mat-menu-item
+            (click)="openDial('500ms', '500ms', '24v', 'propia')">
+            24v
+          </button>
+          <button
+            mat-menu-item
+            (click)="openDial('500ms', '500ms', '48v', 'propia')">
+            48v
+          </button>
+        </mat-menu>
+        <mat-menu #charges="matMenu">
+          <button
+            mat-menu-item
+            (click)="openDial('500ms', '500ms', '24v', 'alquiler')">
+            24v
+          </button>
+          <button
+            mat-menu-item
+            (click)="openDial('500ms', '500ms', '48v', 'alquiler')">
+            48v
+          </button>
+        </mat-menu>
+
+        <button
+          *ngIf="token"
+          mat-button
+          color="secondary"
+          class="p-5 w-100"
+          routerLink="/home">
+          Mantenimiento
         </button>
-        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
-          Aptas
+        <button
+          *ngIf="token"
+          mat-button
+          color="secondary"
+          class="p-5 w-100"
+          [matMenuTriggerFor]="reparaciones">
+          Reparaciones
         </button>
-        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
-          Pendientes de reparacion
+        <mat-menu #reparaciones="matMenu">
+          <button
+            mat-menu-item
+            routerLink="/home/pend"
+            (click)="selectVolta('24v')">
+            24v
+          </button>
+          <button
+            mat-menu-item
+            routerLink="/home/pend"
+            (click)="selectVolta('48v')">
+            48v
+          </button>
+        </mat-menu>
+        <button
+          *ngIf="token"
+          mat-button
+          color="secondary"
+          class="p-5 w-100"
+          [matMenuTriggerFor]="controladas">
+          Baterias Controladas
         </button>
-        <button *ngIf="switched" mat-button color="secondary" class="p-5 w-100">
-          Baterias ingresadas
+        <mat-menu #controladas="matMenu">
+          <button
+            mat-menu-item
+            routerLink="/home/act"
+            (click)="selectVolta('24v')">
+            24v
+          </button>
+          <button
+            mat-menu-item
+            routerLink="/home/act"
+            (click)="selectVolta('48v')">
+            48v
+          </button>
+        </mat-menu>
+        <button
+          *ngIf="token"
+          routerLink="/home/cont"
+          mat-button
+          color="secondary"
+          class="p-5 w-100">
+          Activas En Control
         </button>
-        <button *ngIf="token" mat-button color="secondary" class="p-5 w-100">
-          Observaciones del sector
+        <button
+          *ngIf="token"
+          mat-button
+          color="secondary"
+          class="p-5 w-100"
+          [matMenuTriggerFor]="reserva">
+          Reserva
+        </button>
+        <mat-menu #reserva="matMenu">
+          <button button mat-menu-item [matMenuTriggerFor]="side">
+            Baterias
+          </button>
+          <button button mat-menu-item>Cargadores</button>
+        </mat-menu>
+        <mat-menu #side="matMenu">
+          <button
+            mat-menu-item
+            routerLink="/home/reserv"
+            (click)="selectVolta('24v')">
+            24v
+          </button>
+          <button
+            mat-menu-item
+            routerLink="/home/reserv"
+            (click)="selectVolta('48v')">
+            48v
+          </button>
+        </mat-menu>
+        <button
+          *ngIf="token"
+          mat-button
+          color="secondary"
+          class="p-5 w-100"
+          [matMenuTriggerFor]="obsr">
+          Observaciones
+        </button>
+        <mat-menu #obsr="matMenu">
+          <button mat-menu-item routerLink="/home/obs">
+            Ver Observaciones
+          </button>
+          <button mat-menu-item (click)="createObs('500ms', '500ms')">
+            Crear Observacion
+          </button>
+        </mat-menu>
+        <button
+          *ngIf="token"
+          mat-button
+          color="secondary"
+          class="p-5 w-100"
+          routerLink="/home/fserv">
+          Fuera De Servicio
         </button>
       </div>
     </mat-sidenav>
 
     <mat-sidenav-content class="vh-100">
-      <router-outlet></router-outlet>
+      <div class="example-conteiner">
+        <div class="router-content">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </ng-container>

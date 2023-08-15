@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+  }
+  
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .form-check-input{
+   
+    font-size: 18px;
+  } 
+
+  td, th {
+    text-align: center !important;
+    vertical-align: middle !important;
+    }
+    :host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+    margin-left: 12px;
+    }
+
+
+
+  

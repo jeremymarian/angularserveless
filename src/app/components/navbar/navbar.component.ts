@@ -8,22 +8,29 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import {
-  MatDialog,
-  MatDialogModule,
-} from '@angular/material/dialog';
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DonetasksComponent } from '../donetasks';
 import { CreatetaskComponent } from '../createtask';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { NewuserComponent } from '../newuser';
 import { LoginComponent } from '../login';
 import { TaskloaderService } from 'src/app/services';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { VoltashareService } from 'src/app/services/voltashare.service';
+import { CreateobsComponent } from '../createobs';
 @Component({
   standalone: true,
   imports: [
     NgIf,
+    RouterLink,
     CommonModule,
     MatToolbarModule,
     MatDialogModule,
@@ -36,6 +43,8 @@ import { TaskloaderService } from 'src/app/services';
     MatInputModule,
     RouterOutlet,
     MatIconModule,
+    MatMenuModule,
+   
   ],
 
   selector: 'app-navbar',
@@ -43,20 +52,30 @@ import { TaskloaderService } from 'src/app/services';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnDestroy {
-  private adRef = 'KrLXM8n6CvRWM6ln0BqaO1IvBnh2'
-  token:string | null  = sessionStorage.getItem('')
-  switched:boolean = this.token === this.adRef
+  private adRef = 'KrLXM8n6CvRWM6ln0BqaO1IvBnh2';
+  token: string | null = sessionStorage.getItem('');
+  switched: boolean = this.token === this.adRef;
   mobileQuery: MediaQueryList;
-  name:string | null = sessionStorage.getItem('name')
-  prueba = this.pb.downloadExcel('baterias-6166')
+  name: string | null = sessionStorage.getItem('name');
+  prueba = this.pb.downloadExcel('baterias-6166');
 
   private _mobileQueryListener: () => void;
 
-  constructor(public dialog: MatDialog,changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private pb:TaskloaderService) {
-    this.mobileQuery = media.matchMedia('(max-width: 1190px)');
+  constructor(
+    public dialog: MatDialog,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private pb: TaskloaderService,
+    private v: VoltashareService
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width: 5000px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('click', this._mobileQueryListener);
-    console.log(this.switched)
+    console.log(this.switched);
+  }
+
+  selectVolta(volta:string){
+    this.v.cambiarVoltaje(volta)
   }
 
   openDialog(
@@ -72,11 +91,15 @@ export class NavbarComponent implements OnDestroy {
   }
   openDial(
     enterAnimationDuration: string,
-    exitAnimationDuration: string
+    exitAnimationDuration: string,
+    voltaje: string,
+    tipo: string
   ): void {
+    this.v.cambiarTipo(tipo)
+    this.v.cambiarVoltaje(voltaje)
     this.dialog.open(CreatetaskComponent, {
       width: '500px',
-      height: '400px',
+      height: '650px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -103,8 +126,19 @@ export class NavbarComponent implements OnDestroy {
       exitAnimationDuration,
     });
   }
+  createObs(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(CreateobsComponent, {
+      width: '500px',
+      height: '400px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+  
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener('click', this._mobileQueryListener);
   }
 }
-

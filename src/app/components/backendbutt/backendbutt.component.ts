@@ -8,6 +8,9 @@ import { ChekcsService, TaskloaderService } from 'src/app/services';
 })
 export class BackendbuttComponent {
   @Input() selectedItems!: any[];
+  private adRef = 'KrLXM8n6CvRWM6ln0BqaO1IvBnh2';
+  token: string | null = sessionStorage.getItem('');
+  switched: boolean = this.token === this.adRef;
   load:Boolean = false
   constructor(
     private dt: TaskloaderService,

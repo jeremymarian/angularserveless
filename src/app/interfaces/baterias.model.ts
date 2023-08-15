@@ -1,7 +1,17 @@
 export interface NewBat {
-    "Numero":string,
-    "Marca":Array<String>,
-    "Voltaje":Array<Number>,
+    "Interno":String,
+    "Marca":String,
+    "Serie":String,
+    "Modelo":String,
+    "Voltaje":String,
+    "Amper":String,
+    "TipoDePuente":String,
+    "TipoDeConector":String,
+    "SistemaDeAgua":String,
+    "MedidasCable":String,
+    "AñoDeIngreso":Date,
+    "Ubicacion":String,
+    "Estado":String,
     "Tapa":Boolean,
     "Cable":Boolean,
     "Ficha":Boolean,
@@ -14,6 +24,7 @@ export interface NewBat {
     "Novedades":String
     "Send":Boolean
     "user":String,
+    "Tipo":String
 
     
   }

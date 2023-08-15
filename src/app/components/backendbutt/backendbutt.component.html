@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-center m-2" >
-  <button mat-button (click)="onSubmit()">Send</button>
-  <button mat-button (click)="deleteDocs()">Delete</button>
-  <button mat-button (click)="cleanCheck()">Clean checks</button>
+<div class="d-flex justify-content-center m-2">
+  <button mat-button (click)="onSubmit()">Enviar</button>
+  <button *ngIf="switched" mat-button (click)="deleteDocs()">Borrar</button>
+  <button mat-button (click)="cleanCheck()">Limpiar Checks</button>
 </div>
 
 <h3 class="d-flex justify-content-center" *ngIf="load">
