@@ -18,12 +18,11 @@ import * as ExcelJS from 'exceljs';
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
-  styleUrls: ['./reserva.component.scss']
+  styleUrls: ['./reserva.component.scss'],
 })
 export class ReservaComponent {
-
   dataSource = new MatTableDataSource<any>();
-  showIt = true
+  showIt = true;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
     private db: Firestore,
@@ -33,7 +32,6 @@ export class ReservaComponent {
   }
   async onInit() {
     this.v.voltajeActual.subscribe(e => {
-      
       const q = query(
         collection(this.db, 'baterias-6166'),
         where('Estado', '==', 'Reserva'),
@@ -45,7 +43,7 @@ export class ReservaComponent {
         );
         this.dataSource.data = flatter;
         this.dataSource.sort = this.sort;
-        return this.showIt = false
+        return (this.showIt = false);
       });
     });
   }
@@ -56,7 +54,7 @@ export class ReservaComponent {
 
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Sheet1');
-    
+
     // Agregar encabezados de columna
     worksheet.columns = [
       { header: 'Interno', key: 'Interno' },
@@ -78,5 +76,4 @@ export class ReservaComponent {
     a.click();
     URL.revokeObjectURL(blobUrl);
   }
-
 }

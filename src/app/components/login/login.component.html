@@ -1,27 +1,50 @@
 <div class="d-flex h-100 align-items-center justify-content-center">
   <form
-    class="d-inline-flex flex-column w-50"
+    class="d-inline-flex flex-column w-75"
     (reset)="(formData)"
     [formGroup]="formData"
     (ngSubmit)="onSubmit($event)">
-    <h2 style="color: aliceblue" class="d-flex justify-content-center">
+    <h2
+      style="color: aliceblue; text-align: center"
+      class="d-flex justify-content-center">
       Login de Usuarios
     </h2>
-    <mat-form-field>
-      <mat-label>Usuario</mat-label>
-      <input matInput formControlName="email" />
-    </mat-form-field>
-    <div *ngIf="formData.get('name')?.errors && formData.get('email')?.dirty">
+
+    <label style="color: aliceblue">Usuario</label>
+    <div class="sidebar-search">
+      <div>
+        <div class="input-group">
+          <input
+            formControlName="email"
+            type="text"
+            class="form-control search-menu"
+            placeholder="Email" />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="formData.get('email')?.errors && formData.get('email')?.dirty">
       <p
         style="color: aliceblue"
         *ngIf="formData.get('email')?.hasError('required')">
         Campo obligatorio
       </p>
     </div>
-    <mat-form-field>
-      <mat-label>Contraseña</mat-label>
-      <input matInput type="password" formControlName="password" />
-    </mat-form-field>
+
+    <label style="color: aliceblue">Contraseña</label>
+    <div class="sidebar-search">
+      <div>
+        <div class="input-group">
+          <input
+            formControlName="password"
+            type="password"
+            class="form-control search-menu"
+            placeholder="Password" />
+        </div>
+      </div>
+    </div>
+    <!--<input matInput type="password" formControlName="password" />-->
+
     <div *ngIf="formData.get('password')?.dirty">
       <p
         style="color: aliceblue"
@@ -29,7 +52,12 @@
         Campo obligatorio
       </p>
     </div>
-    <button mat-button color="warn" type="submit" [disabled]="formData.invalid">
+    <br />
+    <button
+      class="button-27"
+      role="button"
+      type="submit"
+      [disabled]="formData.invalid">
       Ingresar
     </button>
     <h3 class="d-flex justify-content-center" *ngIf="load">

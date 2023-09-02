@@ -42,5 +42,4 @@ export class ActivascontrolComponent {
     });
   }
   displayedColumns: string[] = ['Interno', 'Marca', 'Voltaje', 'Novedades'];
-
 }

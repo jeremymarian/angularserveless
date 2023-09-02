@@ -8,7 +8,7 @@ describe('PendientestableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PendientestableComponent]
+      declarations: [PendientestableComponent],
     });
     fixture = TestBed.createComponent(PendientestableComponent);
     component = fixture.componentInstance;

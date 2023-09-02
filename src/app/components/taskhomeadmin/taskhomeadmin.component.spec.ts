@@ -8,7 +8,7 @@ describe('TaskhomeadminComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TaskhomeadminComponent]
+      declarations: [TaskhomeadminComponent],
     });
     fixture = TestBed.createComponent(TaskhomeadminComponent);
     component = fixture.componentInstance;

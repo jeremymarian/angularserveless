@@ -12,5 +12,6 @@ export * from './newuser';
 export * from './observaciones';
 export * from './pendientestable';
 export * from './reserva';
+export * from './sidebar';
 export * from './taskhomeadmin';
 export * from './tasktable';

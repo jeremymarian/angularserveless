@@ -4,13 +4,24 @@
     (reset)="(formData)"
     [formGroup]="formData"
     (ngSubmit)="onSubmit($event)">
-    <h2 style="color: aliceblue" class="d-flex justify-content-center">
+    <h2
+      style="color: aliceblue; font-size: medium"
+      class="d-flex justify-content-center">
       Creacion de Usuarios
     </h2>
-    <mat-form-field>
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="name" />
-    </mat-form-field>
+
+    <label>Nombre</label>
+    <div class="sidebar-search">
+      <div>
+        <div class="input-group">
+          <input
+            formControlName="name"
+            type="text"
+            class="form-control search-menu" />
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="formData.get('name')?.errors && formData.get('name')?.dirty">
       <p
         style="color: aliceblue"
@@ -18,10 +29,19 @@
         Campo obligatorio
       </p>
     </div>
-    <mat-form-field>
-      <mat-label>Apellido</mat-label>
-      <input matInput formControlName="lastname" />
-    </mat-form-field>
+
+    <label>Apellido</label>
+    <div class="sidebar-search">
+      <div>
+        <div class="input-group">
+          <input
+            formControlName="lastname"
+            type="text"
+            class="form-control search-menu" />
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="formData.get('lastname')?.dirty">
       <p
         style="color: aliceblue"
@@ -29,10 +49,19 @@
         Campo obligatorio
       </p>
     </div>
-    <mat-form-field>
-      <mat-label>Usuario</mat-label>
-      <input matInput formControlName="email" placeholder="" />
-    </mat-form-field>
+
+    <label>Usuario</label>
+    <div class="sidebar-search">
+      <div>
+        <div class="input-group">
+          <input
+            formControlName="email"
+            type="text"
+            class="form-control search-menu" />
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="formData.get('email')?.dirty">
       <p
         style="color: aliceblue"
@@ -45,14 +74,19 @@
         Campo obligatorio
       </p>
     </div>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        type="password"
-        formControlName="password"
-        placeholder="" />
-    </mat-form-field>
+
+    <label>Password</label>
+    <div class="sidebar-search">
+      <div>
+        <div class="input-group">
+          <input
+            formControlName="password"
+            type="password"
+            class="form-control search-menu" />
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="formData.get('password')?.dirty">
       <p
         style="color: aliceblue"
@@ -71,7 +105,11 @@
       </p>
     </div>
     <br />
-    <button mat-button color="warn" type="submit" [disabled]="formData.invalid">
+    <button
+      class="button-27"
+      role="button"
+      type="submit"
+      [disabled]="formData.invalid">
       Crear Usuario
     </button>
   </form>

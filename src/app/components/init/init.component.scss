@@ -1,36 +1,41 @@
 .inicio-container {
-    background-image: url('../../../assets/background.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;  /* Color de fondo gris claro */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    border-radius: 10px; /* Bordes redondeados */
-    padding: 2rem;
-  }
+  background-image: url('../../../assets/background.png');
+  background-size: cover;
+  background-repeat: repeat;
+  background-attachment: local;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Color de fondo gris claro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 10px; /* Bordes redondeados */
+  height: 100%;
+  margin: 5% 0 5% 0;
+  padding-bottom: 5%;
+}
 
-  
-  .boton-celestes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
-    height: 200px;
-    background-color: #00a5eb86;
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin: 0.5rem;
-    transition: background-color 0.3s ease; /* Transición de color de fondo */
-  }
-  
-  .boton-celestes:hover {
-    background-color: #008ec5; /* Color más oscuro al pasar el cursor */
-  }
+img {
+  object-fit: contain;
+  height: 50%;
+  width: 50%;
+}
+.boton-celestes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+  height: 25vw;
+  background-color: #00a5eb86;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: background-color 0.3s ease; /* Transición de color de fondo */
+}
+
+.boton-celestes:hover {
+  background-color: #008ec5; /* Color más oscuro al pasar el cursor */
+}

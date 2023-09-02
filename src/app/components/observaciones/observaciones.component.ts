@@ -41,13 +41,11 @@ export class ObservacionesComponent {
   async eliminarRegistro(item: DocumentData) {
     const q = query(
       collection(this.db, 'observaciones'),
-      where('observacion', '==', item['observacion']),
-    
+      where('observacion', '==', item['observacion'])
     );
     const querySnapshot = await getDocs(q);
     const ids = querySnapshot.docs[0].ref.id;
     const docRef = doc(this.db, 'observaciones', ids);
     await deleteDoc(docRef);
-   ;
   }
 }

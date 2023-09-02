@@ -18,11 +18,11 @@ import * as ExcelJS from 'exceljs';
 @Component({
   selector: 'app-fueraserv',
   templateUrl: './fueraserv.component.html',
-  styleUrls: ['./fueraserv.component.scss']
+  styleUrls: ['./fueraserv.component.scss'],
 })
 export class FueraservComponent {
   dataSource = new MatTableDataSource<any>();
-  showIt = true
+  showIt = true;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
     private db: Firestore,
@@ -31,22 +31,16 @@ export class FueraservComponent {
     this.onInit();
   }
   async onInit() {
-    
-      
-      const q = query(
-        collection(this.db, 'baterias-6166'),
-        where('Estado', '==', 'Fuera de servicio'),
-        
-      );
-      const dell = onSnapshot(q, querySnapshot => {
-        const flatter: DocumentData[] = querySnapshot.docs.flatMap(e =>
-          e.data()
-        );
-        this.dataSource.data = flatter;
-        this.dataSource.sort = this.sort;
-        return this.showIt = false
-      });
-    
+    const q = query(
+      collection(this.db, 'baterias-6166'),
+      where('Estado', '==', 'Fuera de servicio')
+    );
+    const dell = onSnapshot(q, querySnapshot => {
+      const flatter: DocumentData[] = querySnapshot.docs.flatMap(e => e.data());
+      this.dataSource.data = flatter;
+      this.dataSource.sort = this.sort;
+      return (this.showIt = false);
+    });
   }
   displayedColumns: string[] = ['Interno', 'Marca', 'Voltaje'];
 
@@ -55,7 +49,7 @@ export class FueraservComponent {
 
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Sheet1');
-    
+
     // Agregar encabezados de columna
     worksheet.columns = [
       { header: 'Interno', key: 'Interno' },
@@ -77,5 +71,4 @@ export class FueraservComponent {
     a.click();
     URL.revokeObjectURL(blobUrl);
   }
-
 }

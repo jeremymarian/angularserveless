@@ -1,24 +1,20 @@
-td, th {
-    text-align: center !important;
-    vertical-align: middle !important;
-    }
-    :host ::ng-deep .mat-sort-header-container {
-    display: flex;
-    justify-content: center;
-    margin-left: 12px;
-    }
+td,
+th {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+  margin-left: 12px;
+}
 
-    .cell-with-icon {
-        display: flex;
-        align-items: center;
-      }
-      
-      /* Separar el botón a la derecha */
-      .cell-with-icon button {
-        margin-left: auto;
-      }
-    
-      
-      
-      
-      
+.cell-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+/* Separar el botón a la derecha */
+.cell-with-icon button {
+  margin-left: auto;
+}

@@ -11,7 +11,7 @@ export class BackendbuttComponent {
   private adRef = 'KrLXM8n6CvRWM6ln0BqaO1IvBnh2';
   token: string | null = sessionStorage.getItem('');
   switched: boolean = this.token === this.adRef;
-  load:Boolean = false
+  load: Boolean = false;
   constructor(
     private dt: TaskloaderService,
     private ck: ChekcsService
@@ -20,9 +20,9 @@ export class BackendbuttComponent {
   }
   onSubmit() {
     this.dt.setData(this.selectedItems);
-    setTimeout(()=>{
-      this.load = true
-    })
+    setTimeout(() => {
+      this.load = true;
+    });
   }
 
   deleteDocs() {
@@ -30,18 +30,15 @@ export class BackendbuttComponent {
   }
 
   cleanCheck() {
-      this.load = true
-      let cleanedChecks = this.selectedItems.map(e => {
-        return (e.check = false as any);
-      });
-  
-      this.ck.setChecks = cleanedChecks;
-  
-      this.ck.setChecks = [];
-      
-     
-      document.location.reload();
-    }
-    
-  
+    this.load = true;
+    let cleanedChecks = this.selectedItems.map(e => {
+      return (e.check = false as any);
+    });
+
+    this.ck.setChecks = cleanedChecks;
+
+    this.ck.setChecks = [];
+
+    document.location.reload();
+  }
 }

@@ -1,0 +1,213 @@
+<nav
+  id="sidebar"
+  class="sidebar"
+  [ngClass]="{ 'sidebar-bg': hasBackgroundImage() }">
+  <div *ngIf="!name" class="user-info">
+    <span class="user-name" style="margin-left: 40px; font-weight: 800">
+      Autenticacion requerida
+    </span>
+  </div>
+  <div *ngIf="name" class="sidebar-content">
+    <div class="sidebar-profile">
+      <div class="user-pic">
+        <img
+          class="img-responsive img-rounded"
+          src="../../../assets/img/user.jpg"
+          alt="User picture" />
+      </div>
+      <div class="user-info">
+        <span class="user-name">
+          {{ name }}
+        </span>
+        <span class="user-status">
+          <i class="fa fa-circle"></i>
+          <span>Online</span>
+        </span>
+      </div>
+    </div>
+    <div class="sidebar-menu">
+      <ul>
+        <ng-container *ngFor="let menu of menus">
+          <li
+            [ngClass]="{
+              active: menu.active,
+              'sidebar-dropdown': menu.type === 'dropdown',
+              'header-menu': menu.type === 'header'
+            }"
+            [hidden]="menu.hidden">
+            <span *ngIf="menu.type === 'header'">{{ menu.title }}</span>
+            <a
+              *ngIf="menu.type !== 'header'"
+              [routerLink]="
+                menu.title === 'Control'
+                  ? control
+                  : menu.title === 'Activas en control'
+                  ? cuidadas
+                  : menu.title === 'Fuera de servicio'
+                  ? out
+                  : null
+              "
+              (click)="toggle(menu)">
+              <i class="{{ menu.icon }}"></i>
+              <span>{{ menu.title }}</span>
+            </a>
+            <div
+              *ngIf="menu.type === 'dropdown'"
+              class="sidebar-submenu"
+              [@slide]="getState(menu)">
+              <ul>
+                <ng-container *ngFor="let submenu1 of menu.submenus">
+                  <li [ngSwitch]="menu.title">
+                    <ng-container *ngSwitchCase="'Baterias'">
+                      <a
+                        [routerLink]="
+                          submenu1.title === 'Listado General'
+                            ? menurouter
+                            : null
+                        "
+                        (click)="toggleSubmenu(submenu1)">
+                        {{ submenu1.title }}</a
+                      >
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Reparaciones'">
+                      <a (click)="toggleSubmenu(submenu1)">{{
+                        submenu1.title
+                      }}</a>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Reserva'">
+                      <a (click)="toggleSubmenu(submenu1)">{{
+                        submenu1.title
+                      }}</a>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Controladas'">
+                      <a (click)="toggleSubmenu(submenu1)">{{
+                        submenu1.title
+                      }}</a>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Observaciones'">
+                      <a
+                        [routerLink]="
+                          submenu1.title === 'Consultar' ? obser : null
+                        "
+                        (click)="
+                          submenu1.title === 'Ingresar'
+                            ? dataFn('createobs')
+                            : toggleSubmenu(submenu1)
+                        "
+                        >{{ submenu1.title }}</a
+                      >
+                    </ng-container>
+
+                    <div class="submenu1" *ngIf="submenu1.active">
+                      <ul>
+                        <ng-container
+                          *ngFor="let submenu2 of submenu1.submenu1">
+                          <li [ngSwitch]="menu.category">
+                            <ng-container *ngSwitchCase="'baterias'">
+                              <a
+                                (click)="
+                                  toggleSubmenu(submenu2);
+                                  voltaSelect(submenu2.title)
+                                "
+                                >{{ submenu2.title }}</a
+                              >
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'controladas'">
+                              <a
+                                [routerLink]="activas"
+                                (click)="
+                                  toggleSubmenu(submenu2);
+                                  voltaSelect(submenu2.title)
+                                "
+                                >{{ submenu2.title }}</a
+                              >
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'reserva'">
+                              <a
+                                [routerLink]="reserva"
+                                (click)="
+                                  toggleSubmenu(submenu2);
+                                  voltaSelect(submenu2.title)
+                                "
+                                >{{ submenu2.title }}</a
+                              >
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                              <a
+                                [routerLink]="changev"
+                                (click)="
+                                  toggleSubmenu(submenu2);
+                                  voltaSelect(submenu2.title)
+                                "
+                                >{{ submenu2.title }}</a
+                              >
+                            </ng-container>
+
+                            <div class="submenu2" *ngIf="submenu2.active">
+                              <ul>
+                                <ng-container
+                                  *ngFor="let submenu3 of submenu2.submenu2">
+                                  <li>
+                                    <a (click)="toggleSubmenu(submenu3)">
+                                      {{ submenu3.title }}</a
+                                    >
+                                    <div
+                                      class="submenu3"
+                                      *ngIf="submenu3.active">
+                                      <ul>
+                                        <ng-container
+                                          *ngFor="
+                                            let submenu4 of submenu3.submenu3
+                                          ">
+                                          <li>
+                                            <a
+                                              (click)="
+                                                dataFn(
+                                                  'createtask',
+                                                  submenu4.title,
+                                                  submenu3.title
+                                                )
+                                              "
+                                              >{{ submenu4.title }}</a
+                                            >
+                                          </li>
+                                        </ng-container>
+                                      </ul>
+                                      <ul>
+                                        <ng-container
+                                          *ngFor="
+                                            let submenu5 of submenu3.submenu4
+                                          ">
+                                          <li>
+                                            <a
+                                              (click)="
+                                                dataFn(
+                                                  'createtask',
+                                                  submenu5.title,
+                                                  submenu3.title
+                                                )
+                                              "
+                                              >{{ submenu5.title }}</a
+                                            >
+                                          </li>
+                                        </ng-container>
+                                      </ul>
+                                    </div>
+                                  </li>
+                                </ng-container>
+                              </ul>
+                            </div>
+                          </li>
+                        </ng-container>
+                      </ul>
+                    </div>
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</nav>

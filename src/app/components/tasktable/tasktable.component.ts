@@ -8,8 +8,6 @@ import {
   onSnapshot,
   query,
   Firestore,
-  doc,
-  updateDoc,
 } from '@angular/fire/firestore';
 import { MatSort } from '@angular/material/sort';
 
@@ -21,6 +19,7 @@ import { MatSort } from '@angular/material/sort';
 export class TasktableComponent {
   private adRef = 'KrLXM8n6CvRWM6ln0BqaO1IvBnh2';
   turnos = ['TN', 'TT', 'TM'];
+  denverLess!: string;
   displayedColumns: string[] = [
     'Interno',
     'Marca',
@@ -56,12 +55,16 @@ export class TasktableComponent {
       this.dataSource.data = flatter;
       this.dataSource.sort = this.sort;
       this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
+      this.dataSource.data.forEach(async element => {
+        this.denverLess = element['Estado'];
+      });
     });
     this.updateEstadoForAllElements();
   }
   updateEstadoForAllElements() {
     this.dataSource.data.forEach(async element => {
       const estado = this.calculateEstado(element);
+
       element['Estado'] = estado;
     });
   }

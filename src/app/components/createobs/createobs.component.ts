@@ -1,7 +1,6 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-
 
 @Component({
   selector: 'app-createobs',
@@ -10,29 +9,24 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 })
 export class CreateobsComponent {
   formData!: FormGroup;
-  
- 
 
   constructor(
     private form: FormBuilder,
-    private lead: Firestore,
-    
+    private lead: Firestore
   ) {
-    
     this.initializeForm();
   }
 
   initializeForm() {
     this.formData = this.form.group({
-      observacion:['',Validators.required]
+      observacion: ['', Validators.required],
     });
   }
 
   async onSubmit(event: Event) {
     console.log(this.formData.value);
     const formDataToSend = {
-      observacion: this.formData.value.observacion
-
+      observacion: this.formData.value.observacion,
     };
     const target = event.currentTarget as HTMLFormElement;
     const refer = await addDoc(
@@ -42,9 +36,7 @@ export class CreateobsComponent {
 
     console.log('document written with id', refer.id);
     this.formData.patchValue({
-      observacion:''
-    })
+      observacion: '',
+    });
   }
-
- 
 }

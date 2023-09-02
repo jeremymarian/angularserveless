@@ -42,7 +42,9 @@ export class TaskhomeadminComponent {
     'Unsend',
   ];
   selectedItems: NewBat[] = [];
-
+  selectAllUnsend = false;
+  availibleChecks = true;
+  condition = false;
   dataSource: MatTableDataSource<DocumentData> =
     new MatTableDataSource<DocumentData>();
   @ViewChild(MatSort) sort!: MatSort;
@@ -60,6 +62,7 @@ export class TaskhomeadminComponent {
       const flatter: DocumentData[] = querySnapshot.docs.flatMap(
         (e: { data: () => any }) => e.data()
       );
+      this.condition = true;
       this.dataSource.data = flatter;
       this.dataSource.sort = this.sort;
       this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
@@ -73,6 +76,36 @@ export class TaskhomeadminComponent {
 
   customFilterPredicate(data: DocumentData, filter: string): boolean {
     return data['Interno'].toString().includes(filter);
+  }
+  selectAllUnsends() {
+    // Limpia la lista antes de agregar elementos
+
+    for (const element of this.dataSource.data) {
+      element['Unsend'] = true;
+      element['Fecha'] = 0;
+      element['Turno'] = '';
+      element['Novedades'] = '';
+      element['Tapa'] = false;
+      element['Cable'] = false;
+      element['Ficha'] = false;
+      element['Terminal'] = false;
+      element['Puente'] = false;
+      element['Limpieza'] = false;
+      element['AguaDest'] = false;
+      if (!element['Send']) {
+        this.selectedItems.push(element as any);
+        this.ch.setChecks = this.selectedItems;
+      } else if (element['Send']) {
+        this.selectedItems.push(element as any);
+        this.ch.setChecks = this.selectedItems;
+      }
+    }
+  }
+  unSelectAllUnsends() {
+    for (const element of this.dataSource.data) {
+      element['Send'] = false;
+      // Elimina 'element' de tu lista de elementos seleccionados para enviar
+    }
   }
 
   handleCheckboxChange(element: any, att: any) {
@@ -92,9 +125,9 @@ export class TaskhomeadminComponent {
     console.log(this.selectedItems);
   }
   handleCheckboxFalse(element: any, att: any) {
-    element[att] = element[att];
+    element[att] = !element[att];
 
-    if (!element[att] && !element.Send) {
+    if (element[att] && !element.Send) {
       element.Fecha = 0;
       element.Turno = '';
       element.Novedades = '';
@@ -107,14 +140,34 @@ export class TaskhomeadminComponent {
       element.AguaDest = false;
       this.selectedItems.push(element);
       this.ch.setChecks = this.selectedItems;
-    } else if (element[att] && element.Send) {
+    } else if (!element[att] && !element.Send) {
       const index = this.selectedItems.findIndex(
         v => v.Interno == element.Interno
       );
       this.selectedItems.splice(index, 1);
       this.ch.setChecks = this.selectedItems;
       /*console.log(index);*/
+    } else if (element[att] && element.Send) {
+      element.Fecha = 0;
+      element.Turno = '';
+      element.Novedades = '';
+      element.Tapa = false;
+      element.Cable = false;
+      element.Ficha = false;
+      element.Terminal = false;
+      element.Puente = false;
+      element.Limpieza = false;
+      element.AguaDest = false;
+      this.selectedItems.push(element);
+      this.ch.setChecks = this.selectedItems;
+    } else if (!element[att] && element.Send) {
+      const index = this.selectedItems.findIndex(
+        v => v.Interno == element.Interno
+      );
+      this.selectedItems.splice(index, 1);
+      this.ch.setChecks = this.selectedItems;
+      /*console.log(index);*/
+      console.log(this.selectedItems);
     }
-    console.log(this.selectedItems);
   }
 }

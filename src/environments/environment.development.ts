@@ -6,4 +6,5 @@ export const environment = {
     apiKey: 'AIzaSyDn76rRwn3o3XkogVjbqpCJ_94TfEt0-6c',
     authDomain: 'taller-667f7.firebaseapp.com',
     messagingSenderId: '986812307719',
-  },};
+  },
+};

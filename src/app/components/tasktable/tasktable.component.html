@@ -33,12 +33,17 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Tapa</th>
         <td mat-cell *matCellDef="let element">
           <input
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            "
             class="form-check-input"
             type="checkbox"
             id="flexCheckChecked8"
             (change)="handleCheckboxChange(element, 'Tapa')"
-            [checked]="element.Tapa"
-            [disabled]="isDisabled(element)" />
+            [checked]="element.Tapa" />
         </td>
       </ng-container>
 
@@ -51,7 +56,12 @@
             (change)="handleCheckboxChange(element, 'Cable')"
             id="flexCheckChecked7"
             [checked]="element.Cable"
-            [disabled]="isDisabled(element)" />
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            " />
         </td>
       </ng-container>
       <ng-container matColumnDef="Ficha">
@@ -63,7 +73,12 @@
             id="flexCheckChecked6"
             (change)="handleCheckboxChange(element, 'Ficha')"
             [checked]="element.Ficha"
-            [disabled]="isDisabled(element)" />
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            " />
         </td>
       </ng-container>
       <ng-container matColumnDef="Terminal">
@@ -75,7 +90,12 @@
             id="flexCheckChecked5"
             (change)="handleCheckboxChange(element, 'Terminal')"
             [checked]="element.Terminal"
-            [disabled]="isDisabled(element)" />
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            " />
         </td>
       </ng-container>
       <ng-container matColumnDef="Puente">
@@ -87,7 +107,12 @@
             id="flexCheckChecked4"
             (change)="handleCheckboxChange(element, 'Puente')"
             [checked]="element.Puente"
-            [disabled]="isDisabled(element)" />
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            " />
         </td>
       </ng-container>
       <ng-container matColumnDef="Limpieza">
@@ -99,7 +124,12 @@
             id="flexCheckChecked3"
             (change)="handleCheckboxChange(element, 'Limpieza')"
             [checked]="element.Limpieza"
-            [disabled]="isDisabled(element)" />
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            " />
         </td>
       </ng-container>
       <ng-container matColumnDef="AguaDest">
@@ -111,7 +141,12 @@
             id="flexCheckChecked2"
             (change)="handleCheckboxChange(element, 'AguaDest')"
             [checked]="element.AguaDest"
-            [disabled]="isDisabled(element)" />
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            " />
         </td>
       </ng-container>
       <ng-container matColumnDef="Turno">
@@ -119,7 +154,12 @@
         <td mat-cell *matCellDef="let element">
           <mat-select
             [(ngModel)]="element.Turno"
-            [disabled]="isDisabled(element)">
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            ">
             <mat-option
               class="w-100"
               *ngFor="let option of turnos"
@@ -133,21 +173,33 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
         <td mat-cell *matCellDef="let element">
           <input
+            *ngIf="denverLess"
             [(ngModel)]="element.Fecha"
             type="date"
-            [disabled]="isDisabled(element)" />
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            " />
         </td>
       </ng-container>
       <ng-container matColumnDef="Novedades">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Novedades</th>
         <td mat-cell *matCellDef="let element">
           <textarea
+            *ngIf="denverLess"
             matInput
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="2"
             cdkAutosizeMaxRows="5"
-            [disabled]="isDisabled(element)"
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            "
             [(ngModel)]="element.Novedades"></textarea>
         </td>
       </ng-container>
@@ -155,12 +207,18 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Enviar</th>
         <td mat-cell *matCellDef="let element">
           <input
+            *ngIf="denverLess"
             class="form-check-input"
             type="checkbox"
             id="flexCheckChecked1"
             [checked]="element.Send"
             (change)="handleCheckboxChange(element, 'Send')"
-            [disabled]="isDisabled(element)" />
+            [disabled]="
+              isDisabled(element) ||
+              denverLess === 'Reparacion' ||
+              denverLess === 'Fuera de servicio' ||
+              denverLess === 'Reserva'
+            " />
         </td>
       </ng-container>
 

@@ -6,18 +6,16 @@ import { NewBat } from '../interfaces';
   providedIn: 'root',
 })
 export class ChekcsService {
-  private checkLoader: BehaviorSubject<NewBat[]> =
-    new BehaviorSubject<NewBat[]>([]);
+  private checkLoader: BehaviorSubject<NewBat[]> = new BehaviorSubject<
+    NewBat[]
+  >([]);
   constructor() {}
 
-  get getChecks(){
-    return this.checkLoader.asObservable()
+  get getChecks() {
+    return this.checkLoader.asObservable();
   }
 
-  set setChecks(data:NewBat[]){
-    this.checkLoader.next(data)
-    
+  set setChecks(data: NewBat[]) {
+    this.checkLoader.next(data);
   }
-
-
-  }
+}

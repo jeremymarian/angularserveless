@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <ng-container [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar class="example-toolbar">
     <button
@@ -7,7 +8,6 @@
       aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Sala de baterias - {{ name }}</span>
     <span class="example-spacer"></span>
     <!-- <button
       *ngIf="switched"
@@ -78,7 +78,10 @@
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
       class="example-sidenav">
-      <div style="position: relative; top: 100px; height: fit-content">
+      <app-sidebar
+        [name]="name"
+        (openModalEvent)="handleOpenModalEvent($event)"></app-sidebar>
+      <!--<div style="position: relative; top: 100px; height: fit-content">
         <h3
           style="position: relative; top: 100%; margin: 41vh 0 16px"
           class="d-flex justify-content-center"
@@ -92,7 +95,7 @@
           class="p-5 w-100">
           Baterias
         </button>
-        <mat-menu #baterias="matMenu" id="custom">
+        <mat-menu #baterias="matMenu">
           <button mat-menu-item [matMenuTriggerFor]="listado">
             Listado General
           </button>
@@ -250,7 +253,7 @@
           routerLink="/home/fserv">
           Fuera De Servicio
         </button>
-      </div>
+      </div>-->
     </mat-sidenav>
 
     <mat-sidenav-content class="vh-100">

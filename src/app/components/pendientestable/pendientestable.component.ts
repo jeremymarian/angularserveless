@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   MatTableDataSource,
   _MatTableDataSource,
@@ -20,19 +20,16 @@ import * as ExcelJS from 'exceljs';
   templateUrl: './pendientestable.component.html',
   styleUrls: ['./pendientestable.component.scss'],
 })
-export class PendientestableComponent {
+export class PendientestableComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
-  showIt = true
+  showIt = true;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
     private db: Firestore,
     private v: VoltashareService
-  ) {
-    this.onInit();
-  }
-  async onInit() {
+  ) {}
+  ngOnInit() {
     this.v.voltajeActual.subscribe(e => {
-      
       const q = query(
         collection(this.db, 'baterias-6166'),
         where('Estado', '==', 'Reparacion'),
@@ -44,7 +41,7 @@ export class PendientestableComponent {
         );
         this.dataSource.data = flatter;
         this.dataSource.sort = this.sort;
-        return this.showIt = false
+        return (this.showIt = false);
       });
     });
   }
@@ -55,7 +52,7 @@ export class PendientestableComponent {
 
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Sheet1');
-    
+
     // Agregar encabezados de columna
     worksheet.columns = [
       { header: 'Interno', key: 'Interno' },
@@ -78,5 +75,4 @@ export class PendientestableComponent {
     a.click();
     URL.revokeObjectURL(blobUrl);
   }
-
 }

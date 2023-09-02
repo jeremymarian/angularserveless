@@ -31,6 +31,8 @@
     "exceljs": "^4.3.0",
     "firebase": "^9.0.0",
     "firebase-tools": "^12.4.6",
+    "ngx-bootstrap": "^11.0.2",
+    "ngx-perfect-scrollbar": "^10.1.1",
     "protobufjs": "^7.2.4",
     "rxfire": "^6.0.0",
     "rxjs": "~7.8.0",

@@ -8,7 +8,7 @@ describe('ActivascontrolComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ActivascontrolComponent]
+      declarations: [ActivascontrolComponent],
     });
     fixture = TestBed.createComponent(ActivascontrolComponent);
     component = fixture.componentInstance;

@@ -23,7 +23,7 @@ import {
   PendientestableComponent,
   ReservaComponent,
   ObservacionesComponent,
-  CreateobsComponent
+  CreateobsComponent,
 } from '../../components';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../../../environments/environment';
@@ -36,8 +36,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatIconModule } from '@angular/material/icon';
-
-
+import { VoltashareService } from 'src/app/services';
 
 @NgModule({
   declarations: [
@@ -76,7 +75,9 @@ import { MatIconModule } from '@angular/material/icon';
     provideFirestore(() => getFirestore()),
     NavbarComponent,
     TextFieldModule,
-    MatIconModule
+    MatIconModule,
   ],
+
+  providers: [VoltashareService],
 })
 export class HomemoduleModule {}

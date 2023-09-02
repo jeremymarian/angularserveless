@@ -1,5 +1,5 @@
 <div class="flex-column w-100">
-  <h1 class="d-flex justify-content-center">Control en Checklist</h1>
+  <h1 class="d-flex justify-content-center">Listado General</h1>
   <mat-form-field>
     <mat-label>Filter</mat-label>
     <input
@@ -9,6 +9,25 @@
       #input />
   </mat-form-field>
   <div class="table-responsive">
+    <div
+      *ngIf="condition"
+      style="
+        display: flex;
+        gap: 20px;
+        margin-left: 1600px;
+        margin-bottom: 15px;
+      ">
+      <button mat-button color="warn" (click)="unSelectAllUnsends()">
+        Habilitar
+      </button>
+      <button
+        style="width: 200px"
+        mat-button
+        color="warn"
+        (click)="selectAllUnsends()">
+        Tildar Todo
+      </button>
+    </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
       <ng-container matColumnDef="Interno">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
